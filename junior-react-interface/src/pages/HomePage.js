@@ -24,7 +24,7 @@ const Wrapper = styled.div`
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: calc(calc(100vh - 210px));
+    height: calc(100vh - 130px);
     img {
       width: 100px;
     }
@@ -40,7 +40,9 @@ export class HomePage extends PureComponent {
   }
   onCurrencyMenuClick = (e) => {
     this.setState({ activeCurrencyLabel: e.currentTarget.textContent.split(' ')[1] })
+    
   }
+  
   render() {
     const {
       onCurrencyMenuClick,

@@ -1,4 +1,5 @@
 import { HomePage } from 'src/pages/HomePage'
+import { SingleProduct } from 'src/pages/product/SingleProduct'
 import React from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Theme from './Theme'
@@ -15,20 +16,10 @@ function App() {
       <Theme>
         <Router>
           <Routes>
-            <Route exact path="/" element={<HomePage client={client}/>} />
-            {/* <Route exact path="/men" element={<MenCategory />} /> */}
-
-            {/* <Route
-            exact
-            path="/user/:id"
-            render={({ match }) => (
-              <ProductDescription user={clients.find((p) => p.id === match.params.id)} />
-            )}
-          /> */}
-            {/* <Route exact path="/comparables" component={Comparables} />
-          <Route exact path="/companyPage" component={CompanyPage} />
-          <Route exact path="/searchResult" component={SearchResult} /> */}
-          </Routes>
+            <Route exact path="/" element={<HomePage client={client} />} />
+            {/* <Route path="/:id" render={(props) => <SingleProduct {...props} />} /> */}
+            <Route exact path="/product/:id" element={<SingleProduct />} />
+            </Routes>
         </Router>
       </Theme>
     </ApolloProvider>

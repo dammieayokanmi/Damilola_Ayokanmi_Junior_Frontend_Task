@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import cartWhite from 'src/assets/images/cart-white.svg'
-
+import { Link } from 'react-router-dom'
 const Wrapper = styled.div`
   box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
   background-color: ${(props) => props.theme.colors.white};
@@ -11,11 +11,10 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
 
-  &:hover > .product-card__content > .product-card__content-image #showCart {
+  &:hover .product-card__content > .product-card__content-image #showCart {
     visibility: visible;
     opacity: 1;
     cursor: pointer;
-    transition: 0.3s;
   }
 
   .product-card__content-image {
@@ -47,7 +46,7 @@ const Wrapper = styled.div`
 
     .stock--overlay {
       text-align: center;
-      background-color: ${(props) => props.theme.colors.bg_overlay};
+      background-color: ${(props) => props.theme.colors.bg_overlay_01};
       display: flex;
       height: 100%;
       width: 100%;
@@ -98,32 +97,34 @@ export class ProductCard extends Component {
 
     return (
       <Wrapper>
-        <div className="product-card__content">
-          <div
-            className="product-card__content-image"
-            style={{ backgroundImage: `url(${product.gallery[0]})` }}
-          >
-            {' '}
-            {product.inStock && (
-              <div className="stock--overlay">
-                <p>OUT OF STOCK</p>
-              </div>
-            )}
-            <div id="showCart">
-              <img src={cartWhite} alt="add to cart" />
-            </div>
-          </div>
-          <div className="product-card__content-text">
-            <p className="product-card__content-text--name">{product.name}</p>
-            <div className="product-card__content-text--price">
+        <Link to={`/product/${product.id}`}>
+          <div className="product-card__content">
+            <div
+              className="product-card__content-image"
+              style={{ backgroundImage: `url(${product.gallery[0]})` }}
+            >
               {' '}
-              <p>{filterCurrentAmount.currency.symbol}</p>
-              {product.prices.some(
-                (currentLabel) => currentLabel.currency.label === activeCurrencyLabel
-              ) && <p>{filterCurrentAmount.amount}</p>}
+              {product.inStock && (
+                <div className="stock--overlay">
+                  <p>OUT OF STOCK</p>
+                </div>
+              )}
+              <div id="showCart">
+                <img src={cartWhite} alt="add to cart" />
+              </div>
+            </div>
+            <div className="product-card__content-text">
+              <p className="product-card__content-text--name">{product.name}</p>
+              <div className="product-card__content-text--price">
+                {' '}
+                <p>{filterCurrentAmount.currency.symbol}</p>
+                {product.prices.some(
+                  (currentLabel) => currentLabel.currency.label === activeCurrencyLabel
+                ) && <p>{filterCurrentAmount.amount}</p>}
+              </div>
             </div>
           </div>
-        </div>
+        </Link>
       </Wrapper>
     )
   }

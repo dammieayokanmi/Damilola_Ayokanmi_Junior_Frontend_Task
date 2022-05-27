@@ -18,7 +18,7 @@ const Wrapper = styled.div`
     background-color: ${(props) => props.theme.colors.white};
     width: 100%;
     @media (max-width: ${(props) => props.theme.breakpoint.sm}) {
-      padding: 5px 25px
+      padding: 5px 25px;
     }
   }
   .scroll {
@@ -89,10 +89,13 @@ const Wrapper = styled.div`
       min-width: 100px;
       height: auto;
       background-color: ${(props) => props.theme.colors.white};
-      display: none;
+      visibility: hidden;
+      opacity: 0;
+      transition: visibility 0s, opacity 0.5s linear;
       box-shadow: rgb(0 0 0 / 10%) 0px 10px 24px;
       &.isShowing {
-        display: block;
+        opacity: 1;
+        visibility: visible;
         top: 61px;
       }
     }
@@ -200,7 +203,7 @@ export class NavBar extends Component {
                   activeCurrencyLabel={activeCurrencyLabel}
                   onCurrencyMenuClick={onCurrencyMenuClick}
                 />
-                <Cart />
+                <Cart client={client} activeCurrencyLabel={activeCurrencyLabel}/>
               </div>
             </div>
           </header>

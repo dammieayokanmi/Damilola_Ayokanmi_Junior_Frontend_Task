@@ -33,11 +33,14 @@ const Wrapper = styled.div`
     min-width: 124px;
     height: auto;
     background-color: ${(props) => props.theme.colors.white};
-    display: none;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s linear;
     box-shadow: rgb(0 0 0 / 10%) 0px 10px 24px;
     &.isShowing {
-      display: block;
-      left: -40px;
+      opacity: 1;
+      visibility: visible;
+            left: -40px;
       top: 30px;
     }
 

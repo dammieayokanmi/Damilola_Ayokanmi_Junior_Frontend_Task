@@ -7,7 +7,6 @@ import loading from 'src/assets/images/loading.gif'
 
 export class TechProducts extends Component {
     static propTypes = {
-        product: PropTypes.object.isRequired,
         activeCurrencyLabel: PropTypes.string,
       }
 
@@ -16,6 +15,7 @@ export class TechProducts extends Component {
     this.state = {
       techProducts: [],
       isLoading: true,
+      category: 'tech',
     }
   }
 
@@ -24,7 +24,7 @@ export class TechProducts extends Component {
       .query({
         query: gql`
           {
-            category(input: { title: $title }) {
+            category(input: { title: "${this.state.category}"}) {
               name
               products {
                 id
@@ -56,7 +56,7 @@ export class TechProducts extends Component {
             }
           }
         `,
-        variables: { title: 'tech' },
+        // variables: { title: "tech" },
 
       })
       .then((response) => {

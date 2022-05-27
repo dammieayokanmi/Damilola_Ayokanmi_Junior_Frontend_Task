@@ -14,7 +14,8 @@ const theme = {
     white: "#ffffff",
     grey_01: "#EEEEEE",
     grey_02: "#fafafa",
-    bg_overlay:'#ffffff80'
+    bg_overlay_01:'#ffffff80',
+    bg_overlay_02:'#39374838'
     // ui_02: "#2EC4B6",
   },
   breakpoint: {

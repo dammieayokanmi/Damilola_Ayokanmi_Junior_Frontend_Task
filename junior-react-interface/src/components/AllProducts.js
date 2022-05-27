@@ -7,7 +7,6 @@ import loading from 'src/assets/images/loading.gif'
 
 export class AllProducts extends Component {
   static propTypes = {
-    product: PropTypes.object.isRequired,
     activeCurrencyLabel: PropTypes.string,
   }
 
