@@ -10,7 +10,7 @@ const Wrapper = styled.div`
   }
   .tab-list-item {
     color: ${(props) => props.theme.colors.text_01};
-    font-size: 13px;
+    font-size: 16px;
     line-height: 120%;
     text-transform: uppercase;
   }

@@ -43,8 +43,8 @@ const Wrapper = styled.div`
     box-shadow: rgb(0 0 0 / 10%) 0px 10px 24px;
     @media (max-width: ${(props) => props.theme.breakpoint.sm}) {
       width: 100%;
-    max-width: 284px;
-    min-width:auto ;
+      max-width: 284px;
+      min-width: auto;
     }
     &.isShowing {
       opacity: 1;
@@ -52,13 +52,11 @@ const Wrapper = styled.div`
       right: 22px;
       top: 80px;
       @media (max-width: ${(props) => props.theme.breakpoint.sm}) {
-   
-    right: 9px;
-    }
+        right: 18px;
+      }
     }
     .menu-content {
       max-height: 400px;
-
       overflow-y: scroll;
 
       .heading {
@@ -68,6 +66,21 @@ const Wrapper = styled.div`
         }
       }
     }
+
+    //custom scrollbar
+    .menu-content::-webkit-scrollbar {
+      width: 3px;
+    }
+
+    .menu-content::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    }
+
+    .menu-content::-webkit-scrollbar-thumb {
+      background-color: ${(props) => props.theme.colors.primary_color};
+      outline: none;
+    }
+
     .total {
       margin: 32px 0;
       display: flex;
@@ -196,6 +209,8 @@ export class Cart extends Component {
       state: { isLoading, isMenuOpen, techProducts },
     } = this
     const cartedProducts = techProducts.slice(0, 3)
+
+
 
     return (
       <Wrapper>

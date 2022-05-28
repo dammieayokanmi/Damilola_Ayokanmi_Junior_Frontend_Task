@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+
 const Wrapper = styled.div`
   .carted-product__content {
     display: grid;
@@ -97,7 +98,7 @@ export class CartedProduct extends Component {
   static propTypes = {
     product: PropTypes.object.isRequired,
     activeCurrencyLabel: PropTypes.string,
-    cartFullPageStyles: PropTypes.string,
+    cartFullPageStyles: PropTypes.bool,
   }
   constructor(props) {
     super(props)
@@ -131,6 +132,7 @@ export class CartedProduct extends Component {
     const allColors = product.attributes.find((attribute) => attribute.name === 'Color')
 
     const allCapacities = product.attributes.find((attribute) => attribute.id === 'Capacity')
+    // console.log(product.attributes)
 
     return (
       <Wrapper>
@@ -153,7 +155,7 @@ export class CartedProduct extends Component {
               <div className="boxes">
                 {allCapacities?.items.map((capacity) => {
                   return (
-                    <p className={` text box ${capacity.value === '1T' ? 'active' : ''}`}>
+                    <p key={capacity.value } className={` text box ${capacity.value === '1T' ? 'active' : ''}`}>
                       {capacity.value}
                     </p>
                   )
@@ -164,7 +166,7 @@ export class CartedProduct extends Component {
               <p className="text">{allColors?.id}:</p>
               <div className="boxes">
                 {allColors?.items.map((color) => {
-                  return <p style={{ backgroundColor: color.value }} className="box color"></p>
+                  return <p key={color.value} style={{ backgroundColor: color.value }} className="box color"></p>
                 })}
               </div>
             </div>

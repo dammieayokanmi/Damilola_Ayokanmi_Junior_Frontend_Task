@@ -1,23 +1,23 @@
 import React from 'react'
 import { ThemeProvider, createGlobalStyle } from 'styled-components'
 import PropTypes from 'prop-types'
-import RalewayRegular from 'src/assets/fonts/Raleway-Regular.ttf';
-import RalewayMedium from 'src/assets/fonts/Raleway-Medium.ttf';
-import RalewayBold from 'src/assets/fonts/Raleway-Bold.ttf';
+import RalewayRegular from 'src/assets/fonts/Raleway-Regular.ttf'
+import RalewayBold from 'src/assets/fonts/Raleway-Bold.ttf'
+import Roboto from 'src/assets/fonts/Roboto-Regular.ttf'
+import RobotoCondensed from 'src/assets/fonts/RobotoCondensed-Regular.ttf'
 
 const theme = {
   colors: {
-    text_01: "#1D1F22",
-    text_02: "#8D8F9A",
-    primary_color: "#5ECE7B",
-    dark: "#2B2B2B",
-    white: "#ffffff",
-    grey_01: "#EEEEEE",
-    grey_02: "#fafafa",
-    bg_overlay_01:'#ffffff80',
-    bg_overlay_02:'#39374838',
-    border_01:'#e5e5e5'
-    // ui_02: "#2EC4B6",
+    text_01: '#1D1F22',
+    text_02: '#8D8F9A',
+    primary_color: '#5ECE7B',
+    dark: '#2B2B2B',
+    white: '#ffffff',
+    grey_01: '#EEEEEE',
+    grey_02: '#fafafa',
+    bg_overlay_01: '#ffffff80',
+    bg_overlay_02: '#39374838',
+    border_01: '#e5e5e5',
   },
   breakpoint: {
     lg: '1058px',
@@ -33,12 +33,6 @@ const GlobalStyle = createGlobalStyle`
   font-style: normal;
   font-weight: 400;
 }
-@font-face {
-  font-family: 'Raleway';
-  src: url(${RalewayMedium}) ;
-  font-style: normal;
-  font-weight: 500;
-}
 
 
 @font-face {
@@ -46,6 +40,19 @@ const GlobalStyle = createGlobalStyle`
   src: url(${RalewayBold}) ;
   font-style: normal;
   font-weight: bold;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url(${Roboto}) ;
+  font-style: normal;
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: 'RobotoCondensed';
+  src: url(${RobotoCondensed}) ;
+  font-style: normal;
+  font-weight: 300;
 }
 
 html{
@@ -96,10 +103,6 @@ const Theme = (props) => (
   <ThemeProvider theme={theme}>
     <div>
       <GlobalStyle />
-      {/* <div
-            className="product-card__content-image"
-            style={{ backgroundImage: `url('assets/')` }}
-          ></div> */}
       {props.children}
     </div>
   </ThemeProvider>

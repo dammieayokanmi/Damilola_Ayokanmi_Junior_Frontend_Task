@@ -18,7 +18,7 @@ const Wrapper = styled.div`
   }
 
   .product-card__content-image {
-    height: 330px;
+    height: 238px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
@@ -94,8 +94,6 @@ export class ProductCard extends Component {
     const filterCurrentAmount = product.prices.find((obj) => {
       return obj.currency.label === activeCurrencyLabel
     })
-    console.log(filterCurrentAmount)
-    console.log(product)
 
     return (
       <Wrapper>

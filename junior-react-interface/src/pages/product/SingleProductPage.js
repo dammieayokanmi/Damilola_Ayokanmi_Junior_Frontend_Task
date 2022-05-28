@@ -39,7 +39,7 @@ export class SingleProductPage extends Component {
           onCurrencyMenuClick={onCurrencyMenuClick}
         />
         <div className="content">
-          <SingleProduct client={client} />
+          <SingleProduct client={client}    activeCurrencyLabel={activeCurrencyLabel}/>
         </div>
       </Wrapper>
     )

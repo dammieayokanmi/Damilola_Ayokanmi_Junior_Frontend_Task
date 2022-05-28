@@ -46,8 +46,8 @@ const Wrapper = styled.div`
     display: flex;
   }
   .navbar__logo {
-    width: 32px;
-    height: 28px;
+    width: 40px;
+    height: 36px;
     cursor: pointer;
   }
   .navbar__category-cart {
