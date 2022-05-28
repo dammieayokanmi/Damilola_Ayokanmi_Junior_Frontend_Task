@@ -3,6 +3,7 @@ import { gql } from '@apollo/client'
 import loading from 'src/assets/images/loading.gif'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
 const Wrapper = styled.div`
   .loading {
@@ -311,7 +312,9 @@ export class SingleProduct extends Component {
                     }
                   </p>
                 </div>
-                <button className="green-btn">ADD TO CART</button>
+                <Link to="/cart">
+                  <button className="green-btn">ADD TO CART</button>
+                </Link>
                 <p className="describe">{singleProduct.description.replace(/<[^>]+>/g, '')}</p>
               </div>
             </div>
