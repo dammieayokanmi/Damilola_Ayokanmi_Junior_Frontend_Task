@@ -1,5 +1,6 @@
 import { HomePage } from 'src/pages/HomePage'
-import { SingleProduct } from 'src/pages/product/SingleProduct'
+import { SingleProductPage } from 'src/pages/product/SingleProductPage'
+import { CartPage } from 'src/pages/CartPage'
 import React from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Theme from './Theme'
@@ -17,8 +18,9 @@ function App() {
         <Router>
           <Routes>
             <Route exact path="/" element={<HomePage client={client} />} />
+            <Route exact path="/cart" element={<CartPage client={client} />} />
             {/* <Route path="/:id" render={(props) => <SingleProduct {...props} />} /> */}
-            <Route exact path="/product/:id" element={<SingleProduct />} />
+            <Route exact path="/product" element={<SingleProductPage client={client}/>} />
             </Routes>
         </Router>
       </Theme>

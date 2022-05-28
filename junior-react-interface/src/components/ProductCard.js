@@ -94,10 +94,12 @@ export class ProductCard extends Component {
     const filterCurrentAmount = product.prices.find((obj) => {
       return obj.currency.label === activeCurrencyLabel
     })
+    console.log(filterCurrentAmount)
+    console.log(product)
 
     return (
       <Wrapper>
-        <Link to={`/product/${product.id}`}>
+        <Link to={`/product/?id=${product.id}`}>
           <div className="product-card__content">
             <div
               className="product-card__content-image"

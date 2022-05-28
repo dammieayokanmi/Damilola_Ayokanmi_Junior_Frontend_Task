@@ -6,6 +6,7 @@ import logo from 'src/assets/images/logo.svg'
 import { CurrrencyMenu } from 'src/components/CurrrencyMenu'
 import { Cart } from 'src/components/Cart'
 import arrow from 'src/assets/images/arrow.svg'
+import { Link } from 'react-router-dom'
 
 const Wrapper = styled.div`
   header {
@@ -106,7 +107,8 @@ const Wrapper = styled.div`
 `
 export class NavBar extends Component {
   static propTypes = {
-    children: PropTypes.instanceOf(Array).isRequired,
+    children: PropTypes.instanceOf(Array),
+    showCategoryTab: PropTypes.bool,
     activeCurrencyLabel: PropTypes.string,
     onCurrencyMenuClick: PropTypes.func,
   }
@@ -114,7 +116,7 @@ export class NavBar extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      activeTab: this.props.children[0].props.label,
+      activeTab: this.props.children && this.props.children[0].props.label,
       isMenuOpen: false,
     }
   }
@@ -123,9 +125,9 @@ export class NavBar extends Component {
     this.setState({ activeTab: tab })
   }
 
-  onClickLogo = () => {
-    this.setState({ activeTab: 'all' })
-  }
+  // onClickLogo = () => {
+  //   this.setState({ activeTab: 'all' })
+  // }
 
   toggleCategoryMenu = () => {
     const currentState = this.state.isMenuOpen
@@ -152,8 +154,7 @@ export class NavBar extends Component {
     const {
       toggleCategoryMenu,
       onClickTabItem,
-      onClickLogo,
-      props: { children, client, activeCurrencyLabel, onCurrencyMenuClick },
+      props: { children, showCategoryTab = true, client, activeCurrencyLabel, onCurrencyMenuClick },
       state: { activeTab, isMenuOpen },
     } = this
 
@@ -162,25 +163,8 @@ export class NavBar extends Component {
         <div className="container">
           <header className="header">
             <div className="navbar">
-              <div className="navbar__tab-list desktop">
-                {children.map((child) => {
-                  const { label } = child.props
-                  return (
-                    <Tab activeTab={activeTab} key={label} label={label} onClick={onClickTabItem} />
-                  )
-                })}
-              </div>
-
-              <div className="navbar__tab-list mobile">
-                <div className="navbar__category-menu" onClick={toggleCategoryMenu}>
-                  <p className="category">Category</p>
-                  <img
-                    className={`navbar_category-toggler ${isMenuOpen ? 'isOpen' : ''}`}
-                    src={arrow}
-                    alt="arrow"
-                  />
-                </div>
-                <div className={`tab-menu ${isMenuOpen ? 'isShowing' : null}`}>
+              {children && showCategoryTab && (
+                <div className="navbar__tab-list desktop">
                   {children.map((child) => {
                     const { label } = child.props
                     return (
@@ -193,9 +177,36 @@ export class NavBar extends Component {
                     )
                   })}
                 </div>
-              </div>
+              )}
+              {children && showCategoryTab && (
+                <div className="navbar__tab-list mobile">
+                  <div className="navbar__category-menu" onClick={toggleCategoryMenu}>
+                    <p className="category">Category</p>
+                    <img
+                      className={`navbar_category-toggler ${isMenuOpen ? 'isOpen' : ''}`}
+                      src={arrow}
+                      alt="arrow"
+                    />
+                  </div>
+                  <div className={`tab-menu ${isMenuOpen ? 'isShowing' : null}`}>
+                    {children.map((child) => {
+                      const { label } = child.props
+                      return (
+                        <Tab
+                          activeTab={activeTab}
+                          key={label}
+                          label={label}
+                          onClick={onClickTabItem}
+                        />
+                      )
+                    })}
+                  </div>
+                </div>
+              )}
 
-              <img onClick={onClickLogo} className="navbar__logo" src={logo} alt="Brand logo" />
+              <Link to="/">
+                <img className="navbar__logo" src={logo} alt="Brand logo" />
+              </Link>
 
               <div className="navbar__category-cart">
                 <CurrrencyMenu
@@ -203,17 +214,19 @@ export class NavBar extends Component {
                   activeCurrencyLabel={activeCurrencyLabel}
                   onCurrencyMenuClick={onCurrencyMenuClick}
                 />
-                <Cart client={client} activeCurrencyLabel={activeCurrencyLabel}/>
+                <Cart client={client} activeCurrencyLabel={activeCurrencyLabel} />
               </div>
             </div>
           </header>
 
-          <div className="tab-content">
-            {children.map((child) => {
-              if (child.props.label !== activeTab) return undefined
-              return child.props.children
-            })}
-          </div>
+          {children && showCategoryTab && (
+            <div className="tab-content">
+              {children.map((child) => {
+                if (child.props.label !== activeTab) return undefined
+                return child.props.children
+              })}
+            </div>
+          )}
         </div>
       </Wrapper>
     )

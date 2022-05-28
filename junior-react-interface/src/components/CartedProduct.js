@@ -2,12 +2,25 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 const Wrapper = styled.div`
-  margin-bottom: 40px;
-
   .carted-product__content {
     display: grid;
-    grid-template-columns: max-content max-content 1fr;
+    grid-template-columns: 60% 37%;
     gap: 8px;
+    margin-bottom: 40px;
+    @media (max-width: ${(props) => props.theme.breakpoint.sm}) {
+      display: flex;
+      flex-direction: column-reverse;
+    }
+
+    .rhs {
+      display: flex;
+      gap: 8px;
+    }
+  }
+  .carted-product__content-page {
+    padding: 15px 0;
+    border-bottom: 1px solid ${(props) => props.theme.colors.border_01};
+    margin-bottom: 0px;
   }
   .carted-product__content-image {
     height: 190px;
@@ -16,6 +29,7 @@ const Wrapper = styled.div`
     background-size: contain;
     max-width: 100%;
     position: relative;
+    flex-grow: 1;
   }
   .details {
     display: flex;
@@ -83,6 +97,7 @@ export class CartedProduct extends Component {
   static propTypes = {
     product: PropTypes.object.isRequired,
     activeCurrencyLabel: PropTypes.string,
+    cartFullPageStyles: PropTypes.string,
   }
   constructor(props) {
     super(props)
@@ -106,23 +121,24 @@ export class CartedProduct extends Component {
     const {
       increaseProductCount,
       decreaseProductCount,
-      props: { product, activeCurrencyLabel },
+      props: { product, activeCurrencyLabel, cartFullPageStyles = false },
       state: { productCount },
     } = this
     const filterCurrentAmount = product?.prices.find((obj) => {
       return obj.currency.label === activeCurrencyLabel
     })
 
-    // var allAttributes =  product.attributes.map((attribute) =>
-    //   attribute.items.map((color) => color.value)
-    // )
     const allColors = product.attributes.find((attribute) => attribute.name === 'Color')
 
     const allCapacities = product.attributes.find((attribute) => attribute.id === 'Capacity')
 
     return (
       <Wrapper>
-        <div className="carted-product__content">
+        <div
+          className={`${
+            cartFullPageStyles ? 'carted-product__content-page ' : ''
+          }carted-product__content`}
+        >
           <div className="details">
             <p className="text">{product.name}</p>
             <div className="price">
@@ -153,15 +169,17 @@ export class CartedProduct extends Component {
               </div>
             </div>
           </div>
-          <div className="quantity">
-            <button onClick={increaseProductCount}>+</button>
-            <p className="count">{productCount}</p>
-            <button onClick={decreaseProductCount}>-</button>
+          <div className="rhs">
+            <div className="quantity">
+              <button onClick={increaseProductCount}>+</button>
+              <p className="count">{productCount}</p>
+              <button onClick={decreaseProductCount}>-</button>
+            </div>
+            <div
+              className="carted-product__content-image"
+              style={{ backgroundImage: `url(${product && product.gallery[0]})` }}
+            ></div>
           </div>
-          <div
-            className="carted-product__content-image"
-            style={{ backgroundImage: `url(${product && product.gallery[0]})` }}
-          ></div>
         </div>
       </Wrapper>
     )

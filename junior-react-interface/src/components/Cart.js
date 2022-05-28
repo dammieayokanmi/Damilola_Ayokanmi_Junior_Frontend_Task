@@ -41,11 +41,20 @@ const Wrapper = styled.div`
     opacity: 0;
     transition: visibility 0s, opacity 0.5s linear;
     box-shadow: rgb(0 0 0 / 10%) 0px 10px 24px;
+    @media (max-width: ${(props) => props.theme.breakpoint.sm}) {
+      width: 100%;
+    max-width: 284px;
+    min-width:auto ;
+    }
     &.isShowing {
       opacity: 1;
       visibility: visible;
       right: 22px;
       top: 80px;
+      @media (max-width: ${(props) => props.theme.breakpoint.sm}) {
+   
+    right: 9px;
+    }
     }
     .menu-content {
       max-height: 400px;
@@ -78,7 +87,7 @@ const Wrapper = styled.div`
         cursor: pointer;
         width: 100%;
       }
-      .view-bag {
+      .white-btn {
         background-color: ${(props) => props.theme.colors.white};
         color: ${(props) => props.theme.colors.text_01};
         border: 1px solid ${(props) => props.theme.colors.text_01};
@@ -88,7 +97,7 @@ const Wrapper = styled.div`
           transition: 0.3s;
         }
       }
-      .checkout {
+      .green-btn {
         background-color: ${(props) => props.theme.colors.primary_color};
         color: ${(props) => props.theme.colors.white};
         border: 1px solid ${(props) => props.theme.colors.primary_color};
@@ -127,7 +136,7 @@ export class Cart extends Component {
     this.state = {
       techProducts: [],
       isLoading: true,
-      isMenuOpen: true,
+      isMenuOpen: false,
       category: 'tech',
     }
   }
@@ -224,9 +233,9 @@ export class Cart extends Component {
           </div>
           <div className="menu-btns">
             <Link to="/cart">
-              <button className="view-bag">VIEW BAG</button>
+              <button className="white-btn">VIEW BAG</button>
             </Link>
-            <button className="checkout">CHECKOUT</button>
+            <button className="green-btn">CHECKOUT</button>
           </div>
         </div>
       </Wrapper>

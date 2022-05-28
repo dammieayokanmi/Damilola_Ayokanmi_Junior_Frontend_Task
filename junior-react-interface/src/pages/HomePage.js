@@ -11,7 +11,7 @@ const Wrapper = styled.div`
     padding: 5px 50px;
     margin: 125px 0 50px 0;
     @media (max-width: ${(props) => props.theme.breakpoint.sm}) {
-      padding: 5px 25px
+      padding: 5px 25px;
     }
   }
   .products--grid {
@@ -40,9 +40,8 @@ export class HomePage extends PureComponent {
   }
   onCurrencyMenuClick = (e) => {
     this.setState({ activeCurrencyLabel: e.currentTarget.textContent.split(' ')[1] })
-    
   }
-  
+
   render() {
     const {
       onCurrencyMenuClick,
